@@ -1,5 +1,3 @@
-# contactsBook
-
 ## Tabela de Conteúdos
 
 - [Visão Geral](#1-visão-geral)
