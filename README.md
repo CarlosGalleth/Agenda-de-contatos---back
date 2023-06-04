@@ -1,73 +1,270 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# contactsBook
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## Tabela de Conteúdos
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+- [Visão Geral](#1-visão-geral)
+- [Iniciar a Api localmente](#3-início-rápido)
+  - [Variáveis de Ambiente](#31-variáveis-de-ambiente)
+  - [Instalando dependências](#32-instalando-dependências)
+  - [Migrations](#33-migrations)
+  - [Inicializar o servidor](#34-inicializar-o-servidor)
 
-## Description
+---
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## 1. Visão Geral
 
-## Installation
+Um pouco das tecnologias usadas.
 
-```bash
-$ npm install
+- [NestJs](https://nestjs.com)
+- [PostgreSQL](https://www.postgresql.org/)
+
+URL base da aplicação:
+http://localhost:3000/
+
+---
+
+## 3. Iniciar a Api localmente
+
+[ Voltar para o topo ](#tabela-de-conteúdos)
+
+### 3.1. Variáveis de Ambiente
+
+Em seguida, crie um arquivo **.env**, copiando o formato do arquivo **.env.example**:
+
+```
+cp .env.example .env
 ```
 
-## Running the app
+Seguindo os exemplos presentes no .env.example:</br>
+Configure suas variáveis de ambiente com suas credenciais do Postgres e uma nova database da sua escolha.</br>
+
+### 3.2. Instalando dependências
+
+Instale as dependências com o comando:
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+npm install
 ```
 
-## Test
+### 3.3. Migrations
+
+Execute as migrations com o comando:
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+nest npx prisma migrate dev
 ```
 
-## Support
+### 3.4. Inicializar o servidor
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+Por fim, utilize o seguinte comando para rodar o servidor localmente:
 
-## Stay in touch
+```bash
+nest start
+```
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+---
 
-## License
+## 4. Documentação das rotas
 
-Nest is [MIT licensed](LICENSE).
+---
+
+<h2 align = "center"> Login </h2>
+
+`POST /login - FORMATO DA REQUISIÇÃO`
+
+```json
+{
+  "email": "email@email.com",
+  "password": "123456"
+}
+```
+
+Caso dê tudo certo, a resposta será assim:
+
+`POST /login - FORMATO DA RESPOSTA - STATUS 201`
+
+```json
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDcxODM3NzYsImV4cCI6MTYwNzQ0Mjk3Niwic3ViIjoiMmE3NWUxMmQtZmQxYy00ODFkLWJhODgtNGQ4YjE3MTAzYjJhIn0.UY67X23mPYAAzT43uFWZDHPUakd2STo5w4AuOcppkyQ"
+}
+```
+
+<h2 align ='center'> Criação de usuário </h2>
+
+`POST /users - FORMATO DA REQUISIÇÃO`
+
+```json
+{
+  "email": "email@email.com",
+  "password": "senha123",
+  "name": "Seu Nome",
+  "phone": "99999999"
+}
+```
+
+Caso dê tudo certo, a resposta será assim:
+
+`POST /users - FORMATO DA RESPOSTA - STATUS 201`
+
+```json
+{
+  "id": "c110dbb6-beb9-4682-ab63-2c12a570d66b",
+  "name": "Seu Nome",
+  "email": "email@email.com",
+  "phone": "99999999"
+}
+```
+
+<h2 align ='center'> Atualização de usuário </h2>
+
+`POST /users/:id - FORMATO DA REQUISIÇÃO`
+
+```json
+{
+  "email": "emailAtualizado@email.com",
+  "password": "senha123",
+  "name": "Seu Nome",
+  "phone": "99999999"
+}
+```
+
+Caso dê tudo certo, a resposta será assim:
+
+`POST /users/:id - FORMATO DA RESPOSTA - STATUS 200`
+
+```json
+{
+  "id": "c110dbb6-beb9-4682-ab63-2c12a570d66b",
+  "name": "Seu Nome Atualizado",
+  "email": "emailAtualizado@email.com",
+  "phone": "99999999"
+}
+```
+
+<h2 align ='center'> Listando usuário </h2>
+
+Nessa aplicação o usuário deve estar autenticado, podendo acessar aos seus dados e seus contatos
+
+`GET /users/:id - FORMATO DA RESPOSTA - STATUS 200`
+
+```json
+[
+  {
+    "id": "c110dbb6-beb9-4682-ab63-2c12a570d66b",
+    "name": "Seu Nome",
+    "email": "email@email.com",
+    "phone": "99999999"
+  }
+]
+```
+
+<h2 align ='center'> Deletar usuario </h2>
+
+Nessa aplicação o usuário deve estar autenticado, podendo deletar sua conta
+
+`DELETE /users/:id - FORMATO DA RESPOSTA - STATUS 200`
+
+<h2 align ='center'> Criando contato </h2>
+
+`POST /contacts - FORMATO DA REQUISIÇÃO`
+
+```json
+{
+  "name": "Nome do Contato",
+  "email": "email@email.com",
+  "phone": "99999999"
+}
+```
+
+Caso dê tudo certo, a resposta será assim:
+
+`POST /contacts - FORMATO DA RESPOSTA - STATUS 201`
+
+```json
+{
+  "id": "c110dbb6-beb9-4682-ab63-2c12a570d66b",
+  "name": "Nome do Contato",
+  "email": "email@email.com",
+  "phone": "99999999"
+}
+```
+
+<h2 align ='center'> Listando Contatos </h2>
+
+`GET /contacts - FORMATO DA REQUISIÇÃO`
+
+`GET /contacts - FORMATO DA RESPOSTA - STATUS 200`
+
+```json
+[
+  {
+    "id": "c110dbb6-beb9-4682-ab63-2c12a570d66b",
+    "name": "Nome do Contato",
+    "email": "email@email.com",
+    "phone": "99999999",
+    "userId": "299233fd-4fdc-4559-bf5c-2db0680a007"
+  },
+  {
+    "id": "c110dbb6-beb9-4682-ab63-2c12a570d66b",
+    "name": "Nome do Contato",
+    "email": "email@email.com",
+    "phone": "99999999",
+    "userId": "299233fd-4fdc-4559-bf5c-2db0680a007"
+  },
+  {
+    "id": "c110dbb6-beb9-4682-ab63-2c12a570d66b",
+    "name": "Nome do Contato",
+    "email": "email@email.com",
+    "phone": "99999999",
+    "userId": "299233fd-4fdc-4559-bf5c-2db0680a007"
+  }
+]
+```
+
+<h2 align ='center'> Listando um contato específico </h2>
+
+`GET /contacts/:id - FORMATO DA REQUISIÇÃO`
+
+`GET /contacts - FORMATO DA RESPOSTA - STATUS 200`
+
+```json
+{
+  "id": "c110dbb6-beb9-4682-ab63-2c12a570d66b",
+  "name": "Nome do Contato",
+  "email": "email@email.com",
+  "phone": "99999999",
+  "userId": "299233fd-4fdc-4559-bf5c-2db0680a007"
+}
+```
+
+<h2 align ='center'> Atualizando contato </h2>
+
+`PATCH /contacts/:id - FORMATO DA REQUISIÇÃO`
+
+```json
+{
+  "name": "Nome do Contato Atualizado",
+  "email": "emailAtualizado@email.com",
+  "phone": "88888888"
+}
+```
+
+Caso dê tudo certo, a resposta será assim:
+
+`PATCH /contacts - FORMATO DA RESPOSTA - STATUS 200`
+
+```json
+{
+  "id": "c110dbb6-beb9-4682-ab63-2c12a570d66b",
+  "name": "Nome do Contato Atualizado",
+  "email": "emailAtualizado@email.com",
+  "phone": "88888888",
+  "userId": "299233fd-4fdc-4559-bf5c-2db0680a007"
+}
+```
+
+<h2 align ='center'> Excluindo um contato </h2>
+
+`DELETE /contacts/:id - FORMATO DA REQUISIÇÃO`
+
+`DELETE /contacts/:id - FORMATO DA RESPOSTA - STATUS 200`
